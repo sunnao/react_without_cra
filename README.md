@@ -96,4 +96,10 @@ babel의 핵심기능 모듈.<br><br>
 react 문법을 자바스크립트로 트랜스파일 하기 위한 패키지.<br>
 JSX로 작성된 코드들을 createElement 함수를 이용한 코드로 변환해주는 바벨 플러그인이 내장되어있다.<br>
 - .babelrc<br>
-바벨은 실행될 때 .babelrc라는 파일을 자동으로 찾아 설정정보를 참조하므로, 로트 디렉토리에 .babelrc 파일을 만든 후, preset 정보를 넣는다.
+바벨은 실행될 때 .babelrc라는 파일을 자동으로 찾아 설정정보를 참조하므로, 로트 디렉토리에 .babelrc 파일을 만든 후, preset 정보를 넣는다.<br><br>
+
+
+**폴더 구조 변경**
+
+1) 루트 디렉토리에 src/app.js파일 생성.
+2) index.html 파일에 있던 script 태그 내 내용들 app.js로 이동.
