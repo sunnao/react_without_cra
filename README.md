@@ -65,7 +65,7 @@ SyntaxError: Unexpected token '<'
 ```
 
 babel 설치 후, body 안의 스크립트 태그에   
-→ `<script type=”text/babel”>` 로 타입 속성을 주면, 실행 전에 해당 스크립트를 트랜스파일 할 것을 명시하게 되면서 JSX로 작성한 element를 실행할 수 있다.  
+→ `<script type="text/babel">` 로 타입 속성을 주면, 실행 전에 해당 스크립트를 트랜스파일 할 것을 명시하게 되면서 JSX로 작성한 element를 실행할 수 있다.  
   
 <br>
 ERROR2>
@@ -102,4 +102,19 @@ JSX로 작성된 코드들을 createElement 함수를 이용한 코드로 변환
 **폴더 구조 변경**
 
 1) 루트 디렉토리에 src/app.js파일 생성.
-2) index.html 파일에 있던 script 태그 내 내용들 app.js로 이동.
+2) index.html 파일에 있던 script 태그 내 내용들 app.js로 이동.<br><br>
+
+### 3. Build 프로세스에 babel 적용
+
+```json
+// package.json
+ "scripts": {
+    "build": "babel src --out-dir dist"
+  }
+  ```
+*babel : babel 실행 명령어<br>
+*src : 원본 소스 폴더명<br>
+*--out-dir : 트랜스파일 결과물을 저장하는 폴더 정의 옵션<br>
+→ "build 할때 babel 을 실행해서 src 폴더 내부에 있는 파일들을 모두 트랜스파일하여 dist 라는 폴더로 옮긴다." 는 명령어
+<br><br>
+빌드타임에서 트랜스파일된 스크립트를 실행할 수 있게 되었으므로 html에서 CDN으로 불러오던 babel을 제거하고, `<script src="dist/app.js">` 로 수정한다. → 이전의 ERROR2> 사라짐.
