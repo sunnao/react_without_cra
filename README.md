@@ -50,7 +50,7 @@ npm install --save react react-dom
 
 <br><br>
 ## 2. Babel 설치
-### <span style='background-color:#fff5b1'>트랜스파일러</span>
+### 트랜스파일러
 
 JSX 등을 사용하려면 트랜스파일러(Babel 등)를 사용해야함
 
@@ -59,19 +59,20 @@ JSX 등을 사용하려면 트랜스파일러(Babel 등)를 사용해야함
  ① 먼저, CDN으로 **Babel standalone** 버전을 추가한 뒤 JSX문법으로 코드를 작성해본다.  
 *babel standalone : 브라우저 환경에서 직접 사용할 수 있도록 만들어진 버전의 바벨. 실시간 컴파일되어 동작 테스트용으로 쓰임.
 
-- <span style="color: tomato">ERROR1></span>
+- **ERROR 1>**
   ```
   SyntaxError: Unexpected token '<'
   ```
 
   babel 설치 후, body 안의 스크립트 태그에   
   → `<script type="text/babel">` 로 타입 속성을 주면, 실행 전에 해당 스크립트를 트랜스파일 할 것을 명시하게 되면서 JSX로 작성한 element를 실행할 수 있다.  
-    
-  <br>
-- <span style="color: tomato">ERROR2></span><br>
+
+- **ERROR 2>**<br>
 
   ```
-  You are using the in-browser Babel transformer. Be sure to precompile your scripts for production - https://babeljs.io/docs/setup/
+  You are using the in-browser Babel transformer. 
+  Be sure to precompile your scripts for production 
+  - https://babeljs.io/docs/setup/
   ```
 
   브라우저에서(in-browser) 스크립트를 실시간으로 트랜스파일 하는 것보다 미리 트랜스파일된 스크립트를 실행할 것을 권장하는 메시지가 뜬다. (빌드타임에서 트랜스파일 권장)
@@ -88,24 +89,24 @@ babel의 핵심기능 모듈.
 
 **2. @babel/cli**
 <br>
-터미널에서 babel을 사용할 수 있게 해주는 도구.<br><br>
+터미널에서 babel을 사용할 수 있게 해주는 도구.
 
 **3. @babel/preset-react**
 <br>
 react 문법을 자바스크립트로 트랜스파일 하기 위한 패키지.<br>
 JSX로 작성된 코드들을 createElement 함수를 이용한 코드로 변환해주는 바벨 플러그인이 내장되어있다.
 
-- **.babelrc**
-<br>
-  바벨은 실행될 때 .babelrc라는 파일을 자동으로 찾아 설정정보를 참조하므로, 루트 디렉토리에 .babelrc 파일을 만든 후, preset 정보를 넣는다.
-    ```json
-      // .babelrc
-      {
-        "presets": ["@babel/preset-react"]
-      }
-    ```
-<br>
+### babel 설정파일
 
+- **.babelrc**<br>
+  바벨은 실행될 때 .babelrc라는 파일을 자동으로 찾아 설정정보를 참조하므로, 루트 디렉토리에 .babelrc 파일을 만든 후, preset 정보를 넣는다.
+
+  ```js
+  // .babelrc
+  {
+    "presets": ["@babel/preset-react"]
+  }
+  ```
 
 ### 폴더 구조 변경
 
@@ -120,11 +121,12 @@ JSX로 작성된 코드들을 createElement 함수를 이용한 코드로 변환
     "build": "babel src --out-dir dist"
   }
   ```
+  
 *`babel` : babel 실행 명령어<br>
 *`src` : 원본 소스 폴더명<br>
 *`--out-dir` : 트랜스파일 결과물을 저장하는 폴더 정의 옵션<br>
 → "build 할때 babel 을 실행해서 src 폴더 내부에 있는 파일들을 모두 트랜스파일하여 dist 라는 폴더로 옮긴다." 는 명령어
-<br><br>
+
 빌드타임에서 트랜스파일된 스크립트를 실행할 수 있게 되었으므로 html에서 CDN으로 불러오던 babel을 제거하고, `<script src="dist/app.js">` 로 수정한다. → 이전의 ERROR2> 사라짐.
 
 <br><br>
@@ -132,10 +134,9 @@ JSX로 작성된 코드들을 createElement 함수를 이용한 코드로 변환
 
 웹팩은 의존성 있는 모듈을 하나의 파일로 통합시켜주는 번들러이다.
 
-### <span style='background-color:#fff5b1'>번들러</span>
+### 번들러
 
-개발단계에서는 유지보수성을 위해 파일이 분리하여 개발한다. 반면 애플리케이션이 실행되는 운영환경에서는 일반적으로 파일의 개수가 최소화 될수록 좋다.
-
+개발단계에서는 유지보수성을 위해 파일이 분리하여 개발한다.<br> 반면 애플리케이션이 실행되는 운영환경에서는 일반적으로 파일의 개수가 최소화 될수록 좋다.<br>
 이를 위해 분리된 모듈을 다시 통합하는 과정을 번들링이라고 하며, 대표적인 번들러로 Webpack, Rollup이 있다.
 
 
@@ -146,7 +147,7 @@ http 요청을 통해 서버로부터 스크립트를 받게되는데, 일반적
 </div>
 </details>
 
-<br><br>
+<br>
 
 **1. webpack 설치**
 ```jsx
@@ -162,28 +163,29 @@ babel과 통합하는역할을 한다.<br>
 기본적으로 Webpack은 JavaScript 및 JSON 파일만 해석 가능한데, 로더(loaders)를 사용하면 Webpack이 다른 포멧의 파일을 처리하고, 이를 앱에서 사용할 수 있는 모듈로 변환 할 수 있다.<br><br>
 
 
+### webpack 설정파일
 
-- **webpack.config.js**
-<br>
-webpack의 설정파일.<br>
-build 환경인 Node.js에서 실행되기 때문에 CommonJS 문법을 사용해야 한다.<br>
-  ```js
-  module.exports = { ... }
-  ```
-  *`entry`: 번들링의 시작점 지정.<br>
-  *`output`: 번들링 결과물에 대한 옵션.<br>
-    - { `path`: 저장할 폴더, `filename`: 저장할 파일명 }<br>
+- **webpack.config.js**<br>
+  build 환경인 Node.js에서 실행되기 때문에 CommonJS 문법을 사용해야 한다.
 
-  *`modules`: 다양한 파일들을 확장자별로 어떻게 처리할지 지정하는 옵션. 어떤 확장자를 어떤 loader를 사용해서 처리할 것인지 정규식을 사용하여 rules를 지정해준다.<br>보통 node_modules는 외부에서 배포한 패키지가 담겨있는 폴더이고, 이미 실행 가능한 형태로 build 되어있기 때문에 exclued 옵션을 통해 제외해준다.
+    ```js
+    module.exports = { ... }
+    ```
 
-  <details>
-    <summary>babel-loader</summary>
-    <div markdown="2">
-    프로젝트 내에서 .js, .jsx, .ts, .tsx, .css, .scss 등 여러가지 파일들이 사용된다. 
-    하지만 webpack은 자바스크립트 코드(.js 파일)만 처리하여 번들링할 수 있다. 이 외의 파일들은 번들링 하기 전에 전처리가 필요한데, 이 전처리에 사용되는 모듈이 loader 이다.
-    </div>
-  </details>
-<br>
+    *`entry`: 번들링의 시작점 지정.<br>
+    *`output`: 번들링 결과물에 대한 옵션.<br>
+      - { `path`: 저장할 폴더, `filename`: 저장할 파일명 }<br>
+
+    *`modules`: 다양한 파일들을 확장자별로 어떻게 처리할지 지정하는 옵션. 어떤 확장자를 어떤 loader를 사용해서 처리할 것인지 정규식을 사용하여 rules를 지정해준다.<br>보통 node_modules는 외부에서 배포한 패키지가 담겨있는 폴더이고, 이미 실행 가능한 형태로 build 되어있기 때문에 exclued 옵션을 통해 제외해준다.
+
+    <details>
+      <summary>babel-loader</summary>
+      <div markdown="2">
+      프로젝트 내에서 .js, .jsx, .ts, .tsx, .css, .scss 등 여러가지 파일들이 사용된다. 
+      하지만 webpack은 자바스크립트 코드(.js 파일)만 처리하여 번들링할 수 있다. 이 외의 파일들은 번들링 하기 전에 전처리가 필요한데, 이 전처리에 사용되는 모듈이 loader 이다.
+      </div>
+    </details>
+  <br>
 
 ### Build 프로세스에 webpack 적용
 
